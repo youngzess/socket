@@ -1,11 +1,15 @@
-var express=require('express');
-var app=express();
-var server=require('http').createServer(app);
-var io=require('socket.io')(server);
+const express = require('express');
+const socket = require('socket.io');
+// const server=require('http').createServer(app);
 // io.listen(server);
-var users={};
-var port = process.env.PORT || 3000;
-    server.listen(port);
+const app = express();
+const users = {};
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
+  console.log(':::Server is UP & running successfully:::')
+  console.log(`:::http://localhost:${port}:::`)
+});
+const io = socket(server)
 
 app.use(express.static(__dirname + '/public'));
 app.set('view engine','ejs');
