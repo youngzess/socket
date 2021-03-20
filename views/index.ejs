@@ -27,30 +27,39 @@
 
 <div id="chatWindow">
 
- <div class="container">
- 		<div class="row">
- 			<div class="col-md-6 col-sm-offset-1 panel panel-primary">
-            <div class="panel-body">
-               <div id="contentWrap" >
-                  <div id="chatWrap" style=" border-radius: 10px; min-height: 200px;max-height: 400px; min-width:100px;overflow-y: auto;">
-                      <div id="chat"></div>
-                  </div>
-               </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-offset-1 panel panel-primary">
+        <div class="panel-body">
+          <div id="contentWrap">
+            <div id="chatWrap" style=" border-radius: 10px; height: 500px; min-width :300px; overflow-y: auto;">
+              <div id="chat"></div>
             </div>
+          </div>
+          <form id="message-box">
+            <div class="form-group col-md-3">
+              <textarea required autofocus style="border: 1px solid black;border-radius: 0.5em;" rows="2" cols="33"
+                id="message" placeholder="Write your message here.."></textarea>
+            </div>
+            <div class="form-group col-md-offset-4 col-md-2 mt-2 ml-0">
+              <button class="btn btn-danger message-btn">send</button>
+            </div>
+          </form>
         </div>
-   <br/>
+
+      </div>
+      <br />
       <div class="col-md-4 col-sm-offset-1 panel panel-default">
         <div class="panel-heading">Currently Online</div>
-         <div class="panel-body">
-            <div  id="users"></div>
+        <div class="panel-body">
+          <div id="users"></div>
         </div>
       </div>
-        <!-- <h4></h4> -->
-   </div>
- </div>
- <br/>
-
- <div class="row">
+      <!-- <h4></h4> -->
+    </div>
+  </div>
+  <br />
+<!-- <div class="row">
   <div class="col-md-2 col-md-offset-2">
     <form id="message-box">
       <div class="form-group">
@@ -61,10 +70,7 @@
       </div>
    </form>
  </div>
- </div>
-
-
-
+ </div> -->
 </div>
 
    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
@@ -116,9 +122,9 @@
         for (i = 0; i < data.length; i++) {
           // if(!socket.id){
           var ids = 'data' + i;
-          //      console.log(socket.id);
+          // console.log(socket.id);
           html += '<li><span id = ' + ids + '>' + data[i] + '</span></li>';
-          var idclick = $('#ids');
+          // var idclick = $('#ids');
           // $(idclick).on('click', '#nickname',function () {
           //   var username = $(this).text(),
           //     message = prompt("type your message");
@@ -148,9 +154,9 @@
 
       socket.on('new message', function (data) {
         if (data.nick === title) {
-          $chat.append("<p style='' align='right' class='msg'><b>" + data.nick + " : </b>" + data.msg + "&nbsp;&nbsp;</p>");
+          $chat.append("<p style='color:grey;' align='right' class='msg'><b><i>" + data.nick + " : </i></b>" + data.msg + "&nbsp;&nbsp;</p>");
         } else {
-          $chat.append("<p style='' align='left' class='msg'><b>&nbsp;&nbsp;&nbsp;" + data.nick + " : </b>" + data.msg + "</p>");
+          $chat.append("<p style='' align='left' class='msg'><b>&nbsp;&nbsp;&nbsp;<i>" + data.nick + " : </i></b>" + data.msg + "</p>");
         }
         scrollCorrect();
       });
@@ -158,7 +164,7 @@
 
 
       socket.on('whisper', function (data) {
-        $chat.append("<p align='left' class='whisper'><b>&nbsp;&nbsp;&nbsp;" + data.nick + " : </b>" + data.msg + "</p><br/>");
+        $chat.append("<p align='left' style = 'color: blue;' class='whisper'><b>&nbsp;&nbsp;&nbsp;" + data.nick + " : </b>" + data.msg + "</p><br/>");
 
       });
 
